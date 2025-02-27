@@ -16,10 +16,12 @@ class DoctrineUserRepository implements UserRepositoryInterface
         $this->entityManager = $entityManager;
     }
 
-    public function save(User $user): void
+    public function save(User $user): bool
     {
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+
+        return true;
     }
 
     public function findById(UserId $id): ?User

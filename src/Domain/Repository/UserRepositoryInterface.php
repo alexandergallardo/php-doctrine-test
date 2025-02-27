@@ -8,7 +8,7 @@ use App\Domain\Model\User\UserEmail;
 
 interface UserRepositoryInterface
 {
-    public function save(User $user): void;
+    public function save(User $user): bool;
     public function findById(UserId $id): ?User;
     public function findByEmail(UserEmail $email) : ?User;
     public function delete(UserId $id): void;

@@ -46,7 +46,7 @@ class RegisterUserController
         } catch (\Exception $e) {
             return [
                 'status' => 500,
-                'body' => ['error' => 'Internal server error'.$e->getMessage()],
+                'body' => ['error' => 'Internal server error'],
             ];
         }
     }
