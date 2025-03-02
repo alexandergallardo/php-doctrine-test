@@ -1,37 +1,37 @@
 services:
   php:
-    container_name: php-service
+    container_name: php-service # Nombre del contenedor para el servicio PHP
     build:
-      context: ./docker/php-apache2
+      context: ./docker/php-apache2 # Ruta al directorio que contiene el Dockerfile para construir la imagen PHP
     volumes:
-      - .:/var/www/html
-      - ./public:/var/www/html/public
+      - .:/var/www/html # Monta el directorio actual en /var/www/html dentro del contenedor
+      - ./public:/var/www/html/public # Monta el directorio public en /var/www/html/public dentro del contenedor. Esto es útil para que Apache sirva los archivos estáticos desde public
     ports:
-      - "8181:80"
+      - "8181:80" # Mapea el puerto 8181 de la máquina host al puerto 80 del contenedor (Apache)
     environment:
-      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public # Configura la raíz de documentos de Apache para que apunte al directorio public
     networks:
-      - app-network
+      - app-network # Asigna el contenedor a la red app-network
     depends_on:
-      - mysql
+      - mysql # Indica que este servicio depende del servicio mysql y debe iniciarse después de él
 
   mysql:
-    image: mysql:8.0
-    container_name: mysql-service
-    command: --default-authentication-plugin=mysql_native_password --sql-mode="NO_ENGINE_SUBSTITUTION"
+    image: mysql:8.0 # Usa la imagen oficial de MySQL versión 8.0
+    container_name: mysql-service # Nombre del contenedor para el servicio MySQL
+    command: --default-authentication-plugin=mysql_native_password --sql-mode="NO_ENGINE_SUBSTITUTION" # Configura el plugin de autenticación y el modo SQL
     environment:
-      MYSQL_ROOT_PASSWORD: passwordtest
-      MYSQL_DATABASE: php_doctrine_test
-      MYSQL_USER: usertest
-      MYSQL_PASSWORD: passwordtest
+      MYSQL_ROOT_PASSWORD: passwordtest # Establece la contraseña del usuario root de MySQL
+      MYSQL_DATABASE: php_doctrine_test # Crea una base de datos llamada php_doctrine_test
+      MYSQL_USER: usertest # Crea un usuario llamado usertest
+      MYSQL_PASSWORD: passwordtest # Establece la contraseña del usuario usertest
     volumes:
-      - ./storage-db:/var/lib/mysql
-      - ./docker/mysql/users.sql:/docker-entrypoint-initdb.d/users.sql
+      - ./storage-db:/var/lib/mysql # Monta el directorio ./storage-db de la máquina host en /var/lib/mysql dentro del contenedor para persistir los datos de MySQL
+      - ./docker/mysql/users.sql:/docker-entrypoint-initdb.d/users.sql # Monta el archivo users.sql en el directorio de inicialización de MySQL para ejecutar scripts SQL al inicio del contenedor
     ports:
-      - "3306:3306"
+      - "3306:3306" # Mapea el puerto 3306 de la máquina host al puerto 3306 del contenedor (MySQL)
     networks:
-      - app-network
+      - app-network # Asigna el contenedor a la red app-network
 
 networks:
   app-network:
-    driver: bridge
+    driver: bridge # Crea una red bridge llamada app-network para que los contenedores puedan comunicarse entre sí
