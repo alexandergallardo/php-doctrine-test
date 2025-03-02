@@ -6,6 +6,8 @@
 - make init  ( Esto inicializa el entorno de desarrollo, construye las imágenes, inicia los contenedores e instala las dependencias de Composer y Doctrine. )
 - make doctrine ( Ejecutar este comando si make init muestra error al instalar doctrine/orm o phpunit )
 - go to http://localhost:8181/  ( 8181 es el puerto mapeado de la máquina host al puerto 80 del contenedor Apache )
+![image](https://github.com/user-attachments/assets/b1ba334b-e9f1-47c2-a9a1-ef5fb8a5945d)
+
 
 ## Makefile Comandos
 - **build**: Construye la imagen del servicio PHP definida en docker-compose.yml
