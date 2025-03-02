@@ -3,9 +3,9 @@
 ## Como inicializar el proyecto
 - git clone https://github.com/alexandergallardo/php-doctrine-test.git
 - cd php-doctrine-test/
-- make init
-- make doctrine ( Ejecutar este comando si make init muestra error al instalar doctrine/orm o phpunit)
-- go to http://localhost:8181/  (8181 es el puerto mapeado de la máquina host al puerto 80 del contenedor Apache)
+- make init  ( Esto inicializa el entorno de desarrollo, construye las imágenes, inicia los contenedores e instala las dependencias de Composer y Doctrine. )
+- make doctrine ( Ejecutar este comando si make init muestra error al instalar doctrine/orm o phpunit )
+- go to http://localhost:8181/  ( 8181 es el puerto mapeado de la máquina host al puerto 80 del contenedor Apache )
 
 ## Makefile Comandos
 - build: Construye la imagen del servicio PHP definida en docker-compose.yml
