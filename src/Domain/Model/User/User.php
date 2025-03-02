@@ -6,20 +6,19 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: "users")]
-#[ORM\Index(name: "email_idx", columns: ["email"])]
 class User
 {
     #[ORM\Id]
-    #[ORM\Column(type: "string")]
+    #[ORM\Column(type: "user_id")]
     private UserId $id;
 
-    #[ORM\Column(type: "string")]
+    #[ORM\Column(type: "name")]
     private UserName $name;
 
-    #[ORM\Column(type: "string", unique: true, length: 191)]
+    #[ORM\Column(type: "email")]
     private UserEmail $email;
 
-    #[ORM\Column(type: "string")]
+    #[ORM\Column(type: "password")]
     private UserPassword $password;
 
     #[ORM\Column(type: "datetime_immutable")]

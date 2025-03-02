@@ -40,12 +40,13 @@ class RegisterUserUseCase
 
         $event = new UserRegisteredEvent($user);
         $handler = new UserRegisteredEventHandler();
-        $handler->handle($event);
+        $message = $handler->handle($event);
 
         return new UserResponseDTO(
             (string) $user->getId(),
             (string) $user->getName(),
-            (string) $user->getEmail()
+            (string) $user->getEmail(),
+            $message,
         );
     }
 }

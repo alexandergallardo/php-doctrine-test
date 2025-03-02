@@ -17,13 +17,13 @@ final class Version20231027120000 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $table = $schema->createTable('users');
-        $table->addColumn('id', 'string', ['length' => 50]);
-        $table->addColumn('name', 'string', ['length' => 80]);
-        $table->addColumn('email', 'string', ['length' => 50]); // Remove unique here.
-        $table->addColumn('password', 'string', ['length' => 100]);
+        $table->addColumn('id', 'string', ['length' => 36]);
+        $table->addColumn('name', 'string', ['length' => 100]);
+        $table->addColumn('email', 'string', ['length' => 100]);
+        $table->addColumn('password', 'string', ['length' => 191]);
         $table->addColumn('createdAt', 'datetime_immutable');
-        $table->setPrimaryKey(['id']);
-       // $table->addUniqueIndex(['email'], 'unique_email_index', ['length' => ['50']]); // Add unique index with prefix.
+        //$table->setPrimaryKey(['id']);
+        $table->addOption('engine', 'InnoDB'); // Especifica el motor InnoDB
     }
 
     public function down(Schema $schema): void

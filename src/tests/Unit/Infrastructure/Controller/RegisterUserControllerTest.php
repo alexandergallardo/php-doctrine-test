@@ -27,8 +27,7 @@ class RegisterUserControllerTest extends TestCase
         ];
 
         $this->userRepository->expects($this->once())
-            ->method('save')
-            ->willReturn(true);
+            ->method('save');
 
         $response = $this->controller->register($requestData);
 

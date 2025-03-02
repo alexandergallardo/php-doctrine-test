@@ -1,15 +1,33 @@
-start:
-    docker-compose up -d
+# Variables
+COMPOSE_FILE := docker-compose.yml
+CONTAINER_PHP := php
+CONTAINER_MYSQL := mysql
+# Comandos
+build:
+	docker compose build --no-cache php
 
-stop:
-    docker-compose down
+up:
+	docker compose up -d
 
-restart:
-    docker-compose down && docker-compose up -d
+down:
+	docker compose down
+
+exec:
+	docker compose exec $(CONTAINER_PHP) bash
 
 logs:
-    docker-compose logs -f
+	docker compose logs -f $(CONTAINER_PHP)
 
-init:
-    docker-compose down -v --remove-orphans
-    docker-compose up -d --build
+restart:
+	docker compose restart $(CONTAINER_PHP)
+
+clean: down
+	docker system prune -a --volumes --force
+
+composer:
+	docker-compose exec $(CONTAINER_PHP) bash -c "composer install"
+
+doctrine:
+	docker-compose exec $(CONTAINER_PHP) bash -c "composer require doctrine/orm doctrine/migrations"
+
+init: build up composer doctrine

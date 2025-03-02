@@ -5,7 +5,6 @@ namespace App\Infrastructure\Controller;
 use App\Application\UseCase\RegisterUserUseCase;
 use App\Application\UseCase\RegisterUserRequest;
 use App\Domain\Repository\UserRepositoryInterface;
-
 class RegisterUserController
 {
     private UserRepositoryInterface $userRepository;

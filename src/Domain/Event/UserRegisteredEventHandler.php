@@ -4,9 +4,9 @@ namespace App\Domain\Event;
 
 class UserRegisteredEventHandler
 {
-    public function handle(UserRegisteredEvent $event): void
+    public function handle(UserRegisteredEvent $event)
     {
         // Simulación de envío de email de bienvenida
-        echo "Email de bienvenida enviado a: " . $event->getUser()->getEmail() . PHP_EOL;
+        return "Welcome email sent to: " . $event->getUser()->getEmail();
     }
 }
